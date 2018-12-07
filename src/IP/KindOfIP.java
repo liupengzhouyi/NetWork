@@ -60,5 +60,4 @@ public class KindOfIP {
         System.out.println(kindOfIP.getKind());
     }
 
-
 }

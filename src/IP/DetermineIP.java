@@ -34,10 +34,10 @@ public class DetermineIP {
      * 1 公有IP
      */
     public void determinel() {
-        int numberI = this.getIpAddress().getNumberI();
-        int numberII = this.getIpAddress().getNumberII();
-        int numberIII = this.getIpAddress().getNumberIII();
-        int numberIV = this.getIpAddress().getNumberIV();
+        int numberI     = this.getIpAddress().getNumberI();
+        int numberII    = this.getIpAddress().getNumberII();
+        int numberIII   = this.getIpAddress().getNumberIII();
+        int numberIV    = this.getIpAddress().getNumberIV();
         boolean keyI = false;
         boolean keyII = false;
         boolean keyIII = false;
