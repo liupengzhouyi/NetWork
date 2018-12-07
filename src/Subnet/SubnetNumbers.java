@@ -71,7 +71,7 @@ public class SubnetNumbers {
      * 2。 得到标准的子网掩码（二进制）
      * 3。 得到你的输入的子网掩码（二进制）
      * 4。 1的位数多几个？
-     * 5。 占位数量-->子网数量
+     * -- 5。 占位数量-->子网数量
      */
     public int getHostNumber() {
         String strI = this.getBinSubnetNumber();
