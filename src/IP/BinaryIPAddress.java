@@ -3,10 +3,23 @@ package IP;
 public class BinaryIPAddress {
 
     public BinaryIPAddress(String numberI, String numberII, String numberIII, String numberIV) {
+        //初始化
+        this.init();
+        //获取值
         this.numberI = numberI;
         this.numberII = numberII;
         this.numberIII = numberIII;
         this.numberIV = numberIV;
+    }
+
+    /**
+     * 初始化
+     */
+    public void init() {
+        this.numberI = new String();
+        this.numberII = new String();
+        this.numberIII = new String();
+        this.numberIV = new String();
     }
 
     /**

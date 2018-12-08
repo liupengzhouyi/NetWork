@@ -5,6 +5,7 @@ import IP.IPAddress;
 import IP.KindOfIP;
 import IP.SubnetMask;
 import Tools.BinaryAddOne;
+import Tools.IPAddressBinaryToDecimal;
 
 public class RangeSubnet {
 
@@ -21,6 +22,7 @@ public class RangeSubnet {
         this.setBinSubnetNumber();
         //设置标准子网掩码
         this.setStandardSubnetNumber();
+
 
     }
 
@@ -73,9 +75,16 @@ public class RangeSubnet {
         return IPBegin;
     }
 
-    public void setIPBegin(IPAddress IPBegin) {
-
-        this.IPBegin = IPBegin;
+    /**
+     * 设置开始网段IP（十进制）
+     */
+    public void setIPBegin() {
+        //获取二进制的IP
+        BinaryIPAddress binaryIPAddress = this.toIPAddress(this.createIPBinaryBegin());
+        //转化十进制
+        IPAddressBinaryToDecimal ipAddressBinaryToDecimal = new IPAddressBinaryToDecimal(binaryIPAddress);
+        //设置开始网段的IP地址
+        this.IPBegin = ipAddressBinaryToDecimal.getIpAddress();
     }
 
     /**
@@ -132,8 +141,13 @@ public class RangeSubnet {
     /**
      * 设置网段结束IP
      */
-    public void setIPEnd(IPAddress IPEnd) {
-        this.IPEnd = IPEnd;
+    public void setIPEnd() {
+        //获取二进制的IP
+        BinaryIPAddress binaryIPAddress = this.toIPAddress(this.createIPBinaryEnd());
+        //转化十进制
+        IPAddressBinaryToDecimal ipAddressBinaryToDecimal = new IPAddressBinaryToDecimal(binaryIPAddress);
+        //设置结束网段的IP地址
+        this.IPEnd = ipAddressBinaryToDecimal.getIpAddress();
     }
 
     public IPAddress getIPbroadcast() {
@@ -303,6 +317,9 @@ public class RangeSubnet {
      */
     public BinaryIPAddress toIPAddress(String string) {
         String[] numbers = new String[5];
+        for (int i=0;i<4;i++) {
+            numbers[i] = "";
+        }
         int j = 0;
         for (int i=0;i<string.length();i++) {
             numbers[j] = numbers[j] + string.charAt(i);
@@ -311,8 +328,12 @@ public class RangeSubnet {
             }
         }
         BinaryIPAddress binaryIPAddress = new BinaryIPAddress(numbers[0], numbers[1], numbers[2], numbers[3]);
+
+
         return binaryIPAddress;
     }
+
+    //public void
 
     /**
      * 测试函数
@@ -320,7 +341,7 @@ public class RangeSubnet {
      */
     public static void main(String[] args) {
         RangeSubnet rangeSubnet = new RangeSubnet(
-                new IPAddress(10, 12, 12, 35),
+                new IPAddress(192, 12, 12, 35),
                 new SubnetMask(255, 255, 255, 224));
 
         System.out.println("IP地址: " + rangeSubnet.getIpAddress().getIPAddress());
@@ -340,12 +361,12 @@ public class RangeSubnet {
         System.out.println("占位状态： " + rangeSubnet.getNowHostNumber());
 
         System.out.println("子网起始（二进制）" + rangeSubnet.createIPBinaryBegin());
-
-        System.out.println("IP网址起点：" + rangeSubnet.getIPBegin());
-
+        rangeSubnet.setIPBegin();
+        System.out.println("IP网址起点：" + rangeSubnet.getIPBegin().getIPAddress());
+        rangeSubnet.setIPEnd();
         System.out.println("子网结束（二进制）" + rangeSubnet.createIPBinaryEnd());
 
-        System.out.println("IP网址结束：" + rangeSubnet.getIPEnd());
+        System.out.println("IP网址结束：" + rangeSubnet.getIPEnd().getIPAddress());
 
         System.out.println("广播IP网址：" + rangeSubnet.getBinSubnetNumber());
     }
