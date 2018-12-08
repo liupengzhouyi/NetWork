@@ -23,7 +23,13 @@ public class RangeSubnet {
         //设置标准子网掩码
         this.setStandardSubnetNumber();
 
+        this.setIPBegin();
 
+        this.setIPEnd();
+
+        this.setBroadcastBinIpAddress();
+
+        this.setBroadcastBIpAddress();
     }
 
     //IP开始地址
@@ -43,6 +49,34 @@ public class RangeSubnet {
 
     //二进制子网掩码
     private String BinSubnetNumber = "";
+
+    //获取网段的广播地址(二进制)
+    private String broadcastBinIpAddress ;
+
+    //获取网段的广播地址
+    private String broadcastBIpAddress ;
+
+    public String getBroadcastBinIpAddress() {
+        return broadcastBinIpAddress;
+    }
+
+    /**
+     * 获取网段的二进制的网络广播地址
+     */
+    public void setBroadcastBinIpAddress() {
+        this.broadcastBinIpAddress = this.createIPBinaryEnd();
+    }
+
+    public String getBroadcastBIpAddress() {
+        return broadcastBIpAddress;
+    }
+
+    /**
+     * 获取网段的网络广播地址
+     */
+    public void setBroadcastBIpAddress() {
+        this.broadcastBIpAddress = this.getIPEnd().getIPAddress();
+    }
 
     public IPAddress getIpAddress() {
         return ipAddress;
@@ -361,13 +395,15 @@ public class RangeSubnet {
         System.out.println("占位状态： " + rangeSubnet.getNowHostNumber());
 
         System.out.println("子网起始（二进制）" + rangeSubnet.createIPBinaryBegin());
-        rangeSubnet.setIPBegin();
+
         System.out.println("IP网址起点：" + rangeSubnet.getIPBegin().getIPAddress());
-        rangeSubnet.setIPEnd();
+
         System.out.println("子网结束（二进制）" + rangeSubnet.createIPBinaryEnd());
 
         System.out.println("IP网址结束：" + rangeSubnet.getIPEnd().getIPAddress());
 
-        System.out.println("广播IP网址：" + rangeSubnet.getBinSubnetNumber());
+        System.out.println("广播IP地址（二进制）" + rangeSubnet.getBroadcastBinIpAddress());
+
+        System.out.println("广播IP网址：" + rangeSubnet.getBroadcastBIpAddress());
     }
 }
