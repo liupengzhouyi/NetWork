@@ -1,8 +1,10 @@
 package Subnet;
 
+import IP.BinaryIPAddress;
 import IP.IPAddress;
 import IP.KindOfIP;
 import IP.SubnetMask;
+import Tools.BinaryAddOne;
 
 public class RangeSubnet {
 
@@ -99,10 +101,37 @@ public class RangeSubnet {
         return string;
     }
 
+    /**
+     * 获取结束IP地址（二进制）
+     * @return
+     */
+    public String getEndBinIp() {
+        int kind = this.getKind();
+        String string = "";
+        if (kind == 1) {
+            for (int i=0;i<9;i++) {
+                string = string + this.getIpAddress().getBinIPAddress().charAt(i);
+            }
+        } else if (kind == 2) {
+            for (int i=0;i<18;i++) {
+                string = string + this.getIpAddress().getBinIPAddress().charAt(i);
+            }
+        } else if (kind == 3) {
+            for (int i=0;i<27;i++) {
+                string = string + this.getIpAddress().getBinIPAddress().charAt(i);
+            }
+        }
+        string = string + this.getNowHostEndNumbers();
+        return string;
+    }
+
     public IPAddress getIPEnd() {
         return IPEnd;
     }
 
+    /**
+     * 设置网段结束IP
+     */
     public void setIPEnd(IPAddress IPEnd) {
         this.IPEnd = IPEnd;
     }
@@ -206,13 +235,93 @@ public class RangeSubnet {
     }
 
     /**
+     * 获取你的占用的网段 的 结束 网段
+     * @return
+     */
+    public String getNowHostEndNumbers() {
+        String str = this.getNowHostNumber();
+
+        //判断是否为 最后一个 网段
+        boolean key = false;
+        for (int i=0;i<str.length();i++) {
+            if (str.charAt(i) == '1' || str.charAt(i) == '.') {
+                key = false;
+            } else {
+                key = true;
+                break;
+            }
+        }
+
+        if (key == false) {
+            //如果是！返回自身
+            str = str;
+        } else {
+            //若不是！返回 + 1
+            BinaryAddOne binaryAddOne = new BinaryAddOne(str);
+            str = binaryAddOne.getNewBinary();
+        }
+        return str;
+    }
+
+    /**
+     * 获取网段的网络位
+     */
+    public String getNetNumber() {
+        return this.getBeginBinIp();
+    }
+
+    /**
+     * 创建 网段 的 开始 （二进制）
+     */
+    public String createIPBinaryBegin() {
+        String string = this.getNetNumber();
+        String tempString = "00000000.00000000.00000000.00000000";
+        int length = string.length();
+        for (int i=length;i<tempString.length();i++) {
+            string = string + tempString.charAt(i);
+        }
+        return string;
+    }
+
+    /**
+     * 创建 网段 的 结束 （二进制）
+     */
+    public String createIPBinaryEnd() {
+        String string = this.getNetNumber();
+        String tempString = "11111111.11111111.11111111.11111111";
+        int length = string.length();
+        for (int i=length;i<tempString.length();i++) {
+            string = string + tempString.charAt(i);
+        }
+        return string;
+    }
+
+    /**
+     * 字符串 转 二进制IP地址
+     * @param string
+     * @return
+     */
+    public BinaryIPAddress toIPAddress(String string) {
+        String[] numbers = new String[5];
+        int j = 0;
+        for (int i=0;i<string.length();i++) {
+            numbers[j] = numbers[j] + string.charAt(i);
+            if (string.charAt(i) == '.') {
+                j++;
+            }
+        }
+        BinaryIPAddress binaryIPAddress = new BinaryIPAddress(numbers[0], numbers[1], numbers[2], numbers[3]);
+        return binaryIPAddress;
+    }
+
+    /**
      * 测试函数
      * @param args
      */
     public static void main(String[] args) {
         RangeSubnet rangeSubnet = new RangeSubnet(
-                new IPAddress(12, 12, 12, 35),
-                new SubnetMask(255, 255, 224, 0));
+                new IPAddress(10, 12, 12, 35),
+                new SubnetMask(255, 255, 255, 224));
 
         System.out.println("IP地址: " + rangeSubnet.getIpAddress().getIPAddress());
 
@@ -230,11 +339,11 @@ public class RangeSubnet {
 
         System.out.println("占位状态： " + rangeSubnet.getNowHostNumber());
 
-        System.out.println("子网起始状态：" + 1);
-
-        System.out.println("子网起始（二进制）" + rangeSubnet.getBeginBinIp());
+        System.out.println("子网起始（二进制）" + rangeSubnet.createIPBinaryBegin());
 
         System.out.println("IP网址起点：" + rangeSubnet.getIPBegin());
+
+        System.out.println("子网结束（二进制）" + rangeSubnet.createIPBinaryEnd());
 
         System.out.println("IP网址结束：" + rangeSubnet.getIPEnd());
 
