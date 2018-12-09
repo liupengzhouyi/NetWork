@@ -1,7 +1,9 @@
 package SubnettingTools;
 
 import SubnettingTools.IP.*;
+import SubnettingTools.Subnet.HostNumbers;
 import SubnettingTools.Subnet.RangeSubnet;
+import SubnettingTools.Subnet.SubnetNumbers;
 
 public class SubnettingTool {
 
@@ -22,17 +24,22 @@ public class SubnettingTool {
         this.setIsSubnetMaskError();
         //设置网络输入是否合法
         this.setIsError();
-
-
-        //设置你的IP开始
-
-
+        //设置你的网段的主机数量
+        this.setHostNumber();
+        //设置你的网段有效主机数量
+        this.setEffectiveHostNumber();
+        //设置你的子网数量
+        this.setSubnetNumbers();
+        //设置你的有效子网数量
+        this.setEffectiveSubnetNumber();
         //设置你的网络种类
         this.setNetKind();
         //设置IP网段的开始IP
         this.setBeginIp();
         //设置IP网段的结束IP
         this.setEndIp();
+
+
     }
 
     /**
@@ -197,32 +204,48 @@ public class SubnettingTool {
         return subnetNumbers;
     }
 
-    public void setSubnetNumbers(int subnetNumbers) {
-        this.subnetNumbers = subnetNumbers;
+    /**
+     * 设置你的子网数量
+     */
+    public void setSubnetNumbers() {
+        SubnetNumbers subnetNumbers = new SubnetNumbers(this.getIpAddress(), this.getSubnetMask());
+        this.subnetNumbers = subnetNumbers.getSubnetNumbers();
     }
 
     public int getEffectiveSubnetNumber() {
         return effectiveSubnetNumber;
     }
 
-    public void setEffectiveSubnetNumber(int effectiveSubnetNumber) {
-        this.effectiveSubnetNumber = effectiveSubnetNumber;
+    /**
+     * 设置你的有效子网数量
+     */
+    public void setEffectiveSubnetNumber() {
+        SubnetNumbers subnetNumbers = new SubnetNumbers(this.getIpAddress(), this.getSubnetMask());
+        this.effectiveSubnetNumber = subnetNumbers.getEffectiveNumber();
     }
 
     public int getHostNumber() {
         return hostNumber;
     }
 
-    public void setHostNumber(int hostNumber) {
-        this.hostNumber = hostNumber;
+    /**
+     * 设置你的网段的主机数量
+     */
+    public void setHostNumber() {
+        HostNumbers hostNumbers = new HostNumbers(this.getIpAddress(), this.getSubnetMask());
+        this.hostNumber = hostNumbers.getHostNumber();
     }
 
     public int getEffectiveHostNumber() {
         return effectiveHostNumber;
     }
 
-    public void setEffectiveHostNumber(int effectiveHostNumber) {
-        this.effectiveHostNumber = effectiveHostNumber;
+    /**
+     * 设置你的网段有效主机数量
+      */
+    public void setEffectiveHostNumber() {
+        HostNumbers hostNumbers = new HostNumbers(this.getIpAddress(), this.getSubnetMask());
+        this.effectiveHostNumber = hostNumbers.getEffectiveHostNumber();
     }
 
     public IPAddress getBeginIp() {
@@ -262,12 +285,15 @@ public class SubnettingTool {
                 new IPAddress(192, 157, 12, 17),
                 new SubnetMask(255, 255, 255, 0)
         );
-        System.out.println("       IP: " + subnettingTool.getIpAddress().getIPAddress());
-        System.out.println("  子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
-        System.out.println("  网络种类: " + subnettingTool.getNetKind());
-        System.out.println("  主机数量: " + subnettingTool.getHostNumber());
-        System.out.println("网段开始IP: " + subnettingTool.getBeginIp().getIPAddress());
-        System.out.println("网段结束IP: " + subnettingTool.getEndIp().getIPAddress());
+        System.out.println("         IP: " + subnettingTool.getIpAddress().getIPAddress());
+        System.out.println("    子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
+        System.out.println("    网络种类: " + subnettingTool.getNetKind());
+        System.out.println("    主机数量: " + subnettingTool.getHostNumber());
+        System.out.println(" 有效主机数量: " + subnettingTool.getEffectiveHostNumber());
+        System.out.println("    子网数量: " + subnettingTool.getSubnetNumbers());
+        System.out.println(" 有效子网数量: " + subnettingTool.getEffectiveSubnetNumber());
+        System.out.println("  网段开始IP: " + subnettingTool.getBeginIp().getIPAddress());
+        System.out.println("  网段结束IP: " + subnettingTool.getEndIp().getIPAddress());
 
         System.out.println("" + subnettingTool.getIsError());
     }

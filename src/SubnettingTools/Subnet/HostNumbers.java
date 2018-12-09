@@ -16,7 +16,7 @@ public class HostNumbers {
         this.setSubnetMask(subnetMask);
         //获取输入的子网掩码
         this.setBinSubnetNumber(this.getSubnetMask().getBinSubnetMask());
-        System.out.println(this.getBinSubnetNumber());
+        //System.out.println(this.getBinSubnetNumber());
     }
 
     // IP地址

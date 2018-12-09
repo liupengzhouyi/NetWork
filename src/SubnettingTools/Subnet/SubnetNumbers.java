@@ -16,7 +16,7 @@ public class SubnetNumbers {
         this.setSubnetMask(subnetMask);
         //获取输入的子网掩码
         this.setBinSubnetNumber(this.getSubnetMask().getBinSubnetMask());
-        System.out.println(this.getBinSubnetNumber());
+        //System.out.println(this.getBinSubnetNumber());
     }
 
     // IP地址
@@ -113,7 +113,12 @@ public class SubnetNumbers {
      * @return
      */
     public int getEffectiveNumber() {
-        int number = this.getSubnetNumbers() - 2;
+        int number = 0;
+        if (this.getSubnetNumbers() > 1) {
+            number = this.getSubnetNumbers() - 2;
+        } else {
+            number = 1;
+        }
         return number;
     }
 
