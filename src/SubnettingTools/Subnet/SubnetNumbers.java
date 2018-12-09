@@ -1,17 +1,17 @@
-package Subnet;
+package SubnettingTools.Subnet;
 
-import IP.IPAddress;
-import IP.KindOfIP;
-import IP.SubnetMask;
+import SubnettingTools.IP.IPAddress;
+import SubnettingTools.IP.KindOfIP;
+import SubnettingTools.IP.SubnetMask;
 
-public class HostNumbers {
+public class SubnetNumbers {
 
     /**
      * 构造函数
      * @param ipAddress
      * @param subnetMask
      */
-    public HostNumbers(IPAddress ipAddress, SubnetMask subnetMask) {
+    public SubnetNumbers(IPAddress ipAddress, SubnetMask subnetMask) {
         this.setIpAddress(ipAddress);
         this.setSubnetMask(subnetMask);
         //获取输入的子网掩码
@@ -64,13 +64,13 @@ public class HostNumbers {
     }
 
     /**
-     * 计算主机位数量
+     * 计算子网数量
      *
      * 1。 得到你的IP种类
      * 2。 得到标准的子网掩码（二进制）
      * 3。 得到你的输入的子网掩码（二进制）
-     * 4。 没有被占用的主机位是多少
-     * 5。 主机位数量 --> 主机数量
+     * 4。 1的位数多几个？
+     * -- 5。 占位数量-->子网数量
      */
     public int getHostNumber() {
         String strI = this.getBinSubnetNumber();
@@ -89,13 +89,6 @@ public class HostNumbers {
                 numbers = numbers + 1;
             }
         }
-        if(number == 1) {
-            numbers = 24 - numbers;
-        } else if (number == 2) {
-            numbers = 16 - numbers;
-        } else if (number == 3) {
-            numbers = 8 - numbers;
-        }
         return numbers;
     }
 
@@ -106,7 +99,7 @@ public class HostNumbers {
      * 2。通过占用的主机位 --> 获取子网书
      * @return
      */
-    public int getHostNumbers() {
+    public int getSubnetNumbers() {
         int number = 1;
         int hostNumber = this.getHostNumber();
         for (int i=0;i<hostNumber;i++) {
@@ -116,13 +109,14 @@ public class HostNumbers {
     }
 
     /**
-     * 获取有效主机数量
+     * 获取有效子网
      * @return
      */
-    public int getEffectiveHostNumber() {
-        int number = this.getHostNumbers() - 2;
+    public int getEffectiveNumber() {
+        int number = this.getSubnetNumbers() - 2;
         return number;
     }
+
 
 
     /**
@@ -130,13 +124,12 @@ public class HostNumbers {
      * @param args
      */
     public static void main(String[] args) {
-        HostNumbers hostNumbers = new HostNumbers(
+        SubnetNumbers subnetNumbers = new SubnetNumbers(
                 new IPAddress(193, 12, 12, 12),
                 new SubnetMask(255, 255, 255, 224));
 
-        System.out.println(hostNumbers.getHostNumber());
-        System.out.println("获取主机位数" + hostNumbers.getHostNumbers());
-        System.out.println("获取有效主机数" + hostNumbers.getEffectiveHostNumber());
+        System.out.println(subnetNumbers.getHostNumber());
+        System.out.println("获取子网数" + subnetNumbers.getSubnetNumbers());
+        System.out.println("获取有效子网数" + subnetNumbers.getEffectiveNumber());
     }
-
 }

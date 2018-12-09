@@ -1,4 +1,4 @@
-package IP;
+package SubnettingTools.IP;
 
 public class BinarySubnetMask {
 

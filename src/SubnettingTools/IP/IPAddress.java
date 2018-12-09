@@ -1,6 +1,6 @@
-package IP;
+package SubnettingTools.IP;
 
-import Tools.DecimalTobinary;
+import SubnettingTools.Tools.DecimalTobinary;
 
 public class IPAddress {
 
@@ -101,7 +101,7 @@ public class IPAddress {
     }
 
     public static void main(String[] args) {
-        IP.IPAddress ipAddress = new IPAddress(125, 23, 54, 67);
+        SubnettingTools.IP.IPAddress ipAddress = new IPAddress(125, 23, 54, 67);
         System.out.println(ipAddress.getIPAddress());
         System.out.println(ipAddress.getBinIPAddress());
     }

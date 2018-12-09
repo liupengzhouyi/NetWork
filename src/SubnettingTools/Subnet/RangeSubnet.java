@@ -1,11 +1,11 @@
-package Subnet;
+package SubnettingTools.Subnet;
 
-import IP.BinaryIPAddress;
-import IP.IPAddress;
-import IP.KindOfIP;
-import IP.SubnetMask;
-import Tools.BinaryAddOne;
-import Tools.IPAddressBinaryToDecimal;
+import SubnettingTools.IP.BinaryIPAddress;
+import SubnettingTools.IP.IPAddress;
+import SubnettingTools.IP.KindOfIP;
+import SubnettingTools.IP.SubnetMask;
+import SubnettingTools.Tools.BinaryAddOne;
+import SubnettingTools.Tools.IPAddressBinaryToDecimal;
 
 public class RangeSubnet {
 
@@ -384,7 +384,7 @@ public class RangeSubnet {
 
         System.out.println("网络种类：" + rangeSubnet.getKind());
 
-        System.out.println("IP 2 : " + rangeSubnet.getIpAddress().getBinIPAddress());
+        System.out.println("SubnettingTools.IP 2 : " + rangeSubnet.getIpAddress().getBinIPAddress());
 
         System.out.println("子网掩码 2 ：" + rangeSubnet.getBinSubnetNumber());
 

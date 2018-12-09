@@ -1,6 +1,6 @@
-package IP;
+package SubnettingTools.IP;
 
-import Tools.DecimalTobinary;
+import SubnettingTools.Tools.DecimalTobinary;
 
 public class SubnetMask {
 
@@ -102,7 +102,7 @@ public class SubnetMask {
     }
 
     public static void main(String[] args) {
-        IP.SubnetMask subnetMask = new SubnetMask(255,255,255, 0);
+        SubnettingTools.IP.SubnetMask subnetMask = new SubnetMask(255,255,255, 0);
         System.out.println(subnetMask.getSubnetMask());
         System.out.println(subnetMask.getBinSubnetMask());
     }

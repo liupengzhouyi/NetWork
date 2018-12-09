@@ -1,7 +1,7 @@
-package Tools;
+package SubnettingTools.Tools;
 
-import IP.BinaryIPAddress;
-import IP.IPAddress;
+import SubnettingTools.IP.BinaryIPAddress;
+import SubnettingTools.IP.IPAddress;
 
 public class IPAddressBinaryToDecimal {
 

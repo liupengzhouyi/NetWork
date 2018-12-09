@@ -1,4 +1,4 @@
-package IP;
+package SubnettingTools.IP;
 
 public class KindOfIP {
     /**
@@ -48,6 +48,8 @@ public class KindOfIP {
             this.kind = 2;
         } else if (numberI >= 192 && numberI <= 223) {
             this.kind = 3;
+        } else if (numberI == 127) {
+            this.kind = 127;
         }
     }
 
@@ -56,7 +58,7 @@ public class KindOfIP {
      * @param args
      */
     public static void main(String[] args) {
-        KindOfIP kindOfIP = new KindOfIP(new IPAddress(125, 255, 255, 255));
+        KindOfIP kindOfIP = new KindOfIP(new IPAddress(127, 255, 255, 255));
         System.out.println(kindOfIP.getKind());
     }
 

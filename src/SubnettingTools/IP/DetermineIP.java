@@ -1,4 +1,4 @@
-package IP;
+package SubnettingTools.IP;
 
 public class DetermineIP {
 
@@ -45,7 +45,7 @@ public class DetermineIP {
 
         //-----------------------------------------------------------------------------------1
         if (numberI > 255 || numberI < 0) {
-            //IP 地址不合法
+            //SubnettingTools.IP 地址不合法
             this.setKey(-1);
         } else {
             if (numberI == 10 || numberI == 172 || numberI == 192) {
@@ -54,7 +54,7 @@ public class DetermineIP {
             }
             //-------------------------------------------------------------------------------2
             if (numberII > 255 || numberII < 0) {
-                //IP 地址不合法
+                //SubnettingTools.IP 地址不合法
                 this.setKey(-1);
             } else {
                 if (numberI == 10) {
@@ -69,7 +69,7 @@ public class DetermineIP {
                 }
                 //----------------------------------------------------------------------------3
                 if (numberIII > 255 || numberIII < 0) {
-                    //IP 地址不合法
+                    //SubnettingTools.IP 地址不合法
                     this.setKey(-1);
                 } else {
                     if (numberI == 10) {
@@ -84,7 +84,7 @@ public class DetermineIP {
                     }
                     //------------------------------------------------------------------------4
                     if (numberIV > 255 || numberIV < 0) {
-                        //IP 地址不合法
+                        //SubnettingTools.IP 地址不合法
                         this.setKey(-1);
                     } else {
                         if (numberI == 10) {
@@ -119,15 +119,15 @@ public class DetermineIP {
      * @param args
      */
     public static void main(String[] args) {
-        for (int i=0;i<256;i++) {
+        for (int i=256;i<289;i++) {
             for (int j=0;j<256;j++) {
                 int l = 12;
                 int k = 13;
                 DetermineIP determineIP = new DetermineIP(new IPAddress(i, j, l, k));
-                if (determineIP.getKey() == 0) {
+
                     System.out.print(i + "." + j + "." + l + "." + k + " : ");
                     System.out.println(determineIP.getKey());
-                }
+
             }
         }
 

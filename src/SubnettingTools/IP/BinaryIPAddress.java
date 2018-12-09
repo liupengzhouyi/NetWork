@@ -1,4 +1,4 @@
-package IP;
+package SubnettingTools.IP;
 
 public class BinaryIPAddress {
 
@@ -23,7 +23,7 @@ public class BinaryIPAddress {
     }
 
     /**
-     * 获取 IP 二进制 表示
+     * 获取 SubnettingTools.IP 二进制 表示
      * @return
      */
     public String getBinaryIPAddress() {
