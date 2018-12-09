@@ -54,7 +54,7 @@ public class RangeSubnet {
     private String broadcastBinIpAddress ;
 
     //获取网段的广播地址
-    private String broadcastBIpAddress ;
+    private IPAddress broadcastBIpAddress ;
 
     public String getBroadcastBinIpAddress() {
         return broadcastBinIpAddress;
@@ -67,7 +67,7 @@ public class RangeSubnet {
         this.broadcastBinIpAddress = this.createIPBinaryEnd();
     }
 
-    public String getBroadcastBIpAddress() {
+    public IPAddress getBroadcastBIpAddress() {
         return broadcastBIpAddress;
     }
 
@@ -75,7 +75,7 @@ public class RangeSubnet {
      * 获取网段的网络广播地址
      */
     public void setBroadcastBIpAddress() {
-        this.broadcastBIpAddress = this.getIPEnd().getIPAddress();
+        this.broadcastBIpAddress = this.getIPEnd();
     }
 
     public IPAddress getIpAddress() {
@@ -404,6 +404,6 @@ public class RangeSubnet {
 
         System.out.println("广播IP地址（二进制）" + rangeSubnet.getBroadcastBinIpAddress());
 
-        System.out.println("广播IP网址：" + rangeSubnet.getBroadcastBIpAddress());
+        System.out.println("广播IP网址：" + rangeSubnet.getBroadcastBIpAddress().getIPAddress());
     }
 }

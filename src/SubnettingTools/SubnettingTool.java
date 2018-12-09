@@ -38,8 +38,8 @@ public class SubnettingTool {
         this.setBeginIp();
         //设置IP网段的结束IP
         this.setEndIp();
-
-
+        //设置网段的广播地址
+        this.setBroadcastBIpAddress();
     }
 
     /**
@@ -233,7 +233,7 @@ public class SubnettingTool {
      */
     public void setHostNumber() {
         HostNumbers hostNumbers = new HostNumbers(this.getIpAddress(), this.getSubnetMask());
-        this.hostNumber = hostNumbers.getHostNumber();
+        this.hostNumber = hostNumbers.getHostNumbers();
     }
 
     public int getEffectiveHostNumber() {
@@ -272,18 +272,23 @@ public class SubnettingTool {
         this.endIp = rangeSubnet.getIPEnd();
     }
 
+
     public IPAddress getBroadcastBIpAddress() {
         return broadcastBIpAddress;
     }
 
-    public void setBroadcastBIpAddress(IPAddress broadcastBIpAddress) {
-        this.broadcastBIpAddress = broadcastBIpAddress;
+    /**
+     * 设置网段的广播地址
+     */
+    public void setBroadcastBIpAddress() {
+        RangeSubnet rangeSubnet = new RangeSubnet(this.getIpAddress(), this.getSubnetMask());
+        this.broadcastBIpAddress = rangeSubnet.getBroadcastBIpAddress();
     }
 
     public static void main(String[] args) {
         SubnettingTool subnettingTool = new SubnettingTool(
-                new IPAddress(192, 157, 12, 17),
-                new SubnetMask(255, 255, 255, 0)
+                new IPAddress(192, 157, 12, 56),
+                new SubnetMask(255, 255, 255, 224)
         );
         System.out.println("         IP: " + subnettingTool.getIpAddress().getIPAddress());
         System.out.println("    子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
@@ -294,6 +299,7 @@ public class SubnettingTool {
         System.out.println(" 有效子网数量: " + subnettingTool.getEffectiveSubnetNumber());
         System.out.println("  网段开始IP: " + subnettingTool.getBeginIp().getIPAddress());
         System.out.println("  网段结束IP: " + subnettingTool.getEndIp().getIPAddress());
+        System.out.println("网段广播地址: " + subnettingTool.getBroadcastBIpAddress().getIPAddress());
 
         System.out.println("" + subnettingTool.getIsError());
     }
