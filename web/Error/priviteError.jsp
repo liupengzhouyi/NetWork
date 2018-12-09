@@ -11,6 +11,8 @@
     <title>输入私有IP</title>
 </head>
 <body>
-
+<%
+    String string = "你的IP地址为私有IP，我们不提供为私有IP地址的服务！";
+%>
 </body>
 </html>

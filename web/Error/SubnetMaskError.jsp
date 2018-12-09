@@ -11,6 +11,8 @@
     <title>子网掩码格式错误</title>
 </head>
 <body>
-
+<%
+    String string = "你的子网掩码错误！";
+%>
 </body>
 </html>
