@@ -1,8 +1,7 @@
 package SubnettingTools;
 
-import SubnettingTools.IP.DetermineIP;
-import SubnettingTools.IP.IPAddress;
-import SubnettingTools.IP.SubnetMask;
+import SubnettingTools.IP.*;
+import SubnettingTools.Subnet.RangeSubnet;
 
 public class SubnettingTool {
 
@@ -17,8 +16,23 @@ public class SubnettingTool {
         //获取值
         this.setIpAddress(ipAddress);
         this.setSubnetMask(subnetMask);
+        //设置网络IP地址输入是否合法
+        this.setIsIpError();
+        //设置子网掩码是否正确
+        this.setIsSubnetMaskError();
         //设置网络输入是否合法
         this.setIsError();
+
+
+        //设置你的IP开始
+
+
+        //设置你的网络种类
+        this.setNetKind();
+        //设置IP网段的开始IP
+        this.setBeginIp();
+        //设置IP网段的结束IP
+        this.setEndIp();
     }
 
     /**
@@ -31,6 +45,8 @@ public class SubnettingTool {
         this.endIp = new IPAddress(0, 0, 0, 0);
         this.isError = new String();
         this.netKind = new String();
+        this.isIpError = new String();
+        this.isSubnetMaskError = new String();
         this.broadcastBIpAddress = new IPAddress(0, 0, 0, 0);
     }
 
@@ -38,6 +54,10 @@ public class SubnettingTool {
     private IPAddress ipAddress = null;
     //用户输入的子网掩码
     private SubnetMask subnetMask = null;
+    //IP地址是否合法
+    private String isIpError = null;
+    //子网掩码是否合法
+    private String isSubnetMaskError = null;
     //是否合法
     private String isError = null;
     //错误种类
@@ -80,20 +100,67 @@ public class SubnettingTool {
         this.subnetMask = subnetMask;
     }
 
+    public String getIsIpError() {
+        return isIpError;
+    }
+
+    /**
+     * 设置网络输入是否合法
+     * // 错 误 -》-1
+     * // 私 有 IP-》0
+     * // 公 有 IP-》1
+     * // 127 --> 127
+     */
+    public void setIsIpError() {
+        DetermineIP determineIP = new DetermineIP(this.getIpAddress());
+        int kind = determineIP.getKey();
+        this.isIpError = "" + kind;
+    }
+
+    public String getIsSubnetMaskError() {
+        return isSubnetMaskError;
+    }
+
+    /**
+     * 设置子网掩码是否正确
+     * 0 -》错误
+     * 1 -》正确
+     */
+    public void setIsSubnetMaskError() {
+        //获取子网掩码
+        DetermineSubnetMask determineSubnetMask = new DetermineSubnetMask(this.getSubnetMask());
+        //判断子网掩码
+        int kind = determineSubnetMask.getKind();
+        //设置子网掩码是否正确
+        this.isSubnetMaskError = "" + kind;
+    }
+
     public String getIsError() {
         return isError;
     }
 
     /**
      * 设置网络输入是否合法
-     * //错误-》-1
-     * //私有IP-》0
-     * //公有IP-》1
+     * 0 -> 子网掩码 错误
+     * 1 -> IP 正确
+     * 2 -> IP 私有IP
+     * 3 -> IP 127
+     *
      */
     public void setIsError() {
-        DetermineIP determineIP = new DetermineIP(this.getIpAddress());
-        int kind = determineIP.getKey();
-        this.isError = "" + kind;
+        String IP = this.getIsIpError();
+        String SubnetMask = this.getIsSubnetMaskError();
+        if (SubnetMask == "0") {
+            this.isError = "0";
+        } else {
+            if(IP == "1") {
+                this.isError = "1";
+            } else if (IP == "0") {
+                this.isError = "2";
+            } else if (IP == "127") {
+                this.isError = "3";
+            }
+        }
     }
 
     public int getError() {
@@ -108,8 +175,22 @@ public class SubnettingTool {
         return netKind;
     }
 
-    public void setNetKind(String netKind) {
+    /**
+     * 设置你的网络种类
+     */
+    public void setNetKind() {
         this.netKind = netKind;
+        KindOfIP kindOfIP = new KindOfIP(this.getIpAddress());
+        int kind = kindOfIP.getKind();
+        if (kind == 1) {
+            this.netKind = "A";
+        } else if (kind == 2) {
+            this.netKind = "B";
+        } else if (kind == 3) {
+            this.netKind = "C";
+        } else if (kind == 127) {
+            this.netKind = "127";
+        }
     }
 
     public int getSubnetNumbers() {
@@ -148,16 +229,24 @@ public class SubnettingTool {
         return beginIp;
     }
 
-    public void setBeginIp(IPAddress beginIp) {
-        this.beginIp = beginIp;
+    /**
+     * 设置IP网段的开始IP
+     */
+    public void setBeginIp() {
+        RangeSubnet rangeSubnet = new RangeSubnet(this.getIpAddress(), this.getSubnetMask());
+        this.beginIp = rangeSubnet.getIPBegin();
     }
 
     public IPAddress getEndIp() {
         return endIp;
     }
 
-    public void setEndIp(IPAddress endIp) {
-        this.endIp = endIp;
+    /**
+     * 设置IP网段的结束IP
+     */
+    public void setEndIp() {
+        RangeSubnet rangeSubnet = new RangeSubnet(this.getIpAddress(), this.getSubnetMask());
+        this.endIp = rangeSubnet.getIPEnd();
     }
 
     public IPAddress getBroadcastBIpAddress() {
@@ -166,5 +255,20 @@ public class SubnettingTool {
 
     public void setBroadcastBIpAddress(IPAddress broadcastBIpAddress) {
         this.broadcastBIpAddress = broadcastBIpAddress;
+    }
+
+    public static void main(String[] args) {
+        SubnettingTool subnettingTool = new SubnettingTool(
+                new IPAddress(192, 157, 12, 17),
+                new SubnetMask(255, 255, 255, 0)
+        );
+        System.out.println("       IP: " + subnettingTool.getIpAddress().getIPAddress());
+        System.out.println("  子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
+        System.out.println("  网络种类: " + subnettingTool.getNetKind());
+        System.out.println("  主机数量: " + subnettingTool.getHostNumber());
+        System.out.println("网段开始IP: " + subnettingTool.getBeginIp().getIPAddress());
+        System.out.println("网段结束IP: " + subnettingTool.getEndIp().getIPAddress());
+
+        System.out.println("" + subnettingTool.getIsError());
     }
 }
