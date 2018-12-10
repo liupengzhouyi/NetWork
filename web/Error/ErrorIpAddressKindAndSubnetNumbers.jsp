@@ -2,19 +2,15 @@
   Created by IntelliJ IDEA.
   User: liupeng
   Date: 2018-12-10
-  Time: 00:31
+  Time: 19:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>IP信息</title>
+    <title>子网掩码与网络种类错误</title>
 </head>
 <body>
-    <h1>
-        <center>
-            IP 详细 信息
-        </center>
-    </h1>
+
 </body>
 </html>

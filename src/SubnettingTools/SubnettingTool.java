@@ -156,15 +156,16 @@ public class SubnettingTool {
      */
     public void setIsError() {
         String IP = this.getIsIpError();
+        //System.out.println(IP);
         String SubnetMask = this.getIsSubnetMaskError();
-        if (SubnetMask == "0") {
+        if (SubnetMask.equals("0")) {
             this.isError = "0";
         } else {
-            if(IP == "1") {
+            if(IP.equals("1")) {
                 this.isError = "1";
-            } else if (IP == "0") {
+            } else if (IP.equals("0")) {
                 this.isError = "2";
-            } else if (IP == "127") {
+            } else if (IP.equals("127")) {
                 this.isError = "3";
             }
         }
@@ -290,6 +291,7 @@ public class SubnettingTool {
                 new IPAddress(198, 157, 12, 56),
                 new SubnetMask(255, 255, 224, 224)
         );
+        System.out.println("输入信息是否合法：" + subnettingTool.getIsError());
         System.out.println("         IP: " + subnettingTool.getIpAddress().getIPAddress());
         System.out.println("    子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
         System.out.println("    网络种类: " + subnettingTool.getNetKind());
@@ -301,6 +303,6 @@ public class SubnettingTool {
         System.out.println("  网段结束IP: " + subnettingTool.getEndIp().getIPAddress());
         System.out.println("网段广播地址： " + subnettingTool.getBroadcastBIpAddress().getIPAddress());
 
-        System.out.println("" + subnettingTool.getIsError());
+        //System.out.println("" + subnettingTool.getIsError());
     }
 }
