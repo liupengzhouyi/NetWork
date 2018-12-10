@@ -11,7 +11,7 @@
     <title>查看你的网络</title>
 </head>
 <body>
-<form action="#" method="post">
+<form action="/SubnettingTools/GetInputInformationServlet" method="post">
     <table border="1">
         <tr>
             <th>

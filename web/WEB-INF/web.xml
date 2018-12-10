@@ -3,4 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <!--获取输入的IP信息-->
+    <servlet>
+        <servlet-name>GetInputInformationServlet</servlet-name>
+        <servlet-class>SubnettingTools.GetInputInformationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetInputInformationServlet</servlet-name>
+        <url-pattern>/SubnettingTools/GetInputInformationServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
