@@ -8,9 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>子网划分小工具</title>
   </head>
   <body>
-  $END$
+  <div style="width: 100%">
+    <table width="100%" cellpadding="20%" bgcolor="aqua">
+      <tr>
+
+      </tr>
+    </table>
+  </div>
+
   </body>
 </html>

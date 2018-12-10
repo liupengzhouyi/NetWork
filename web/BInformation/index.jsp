@@ -9,17 +9,21 @@
 <html>
 <head>
     <title>IP信息</title>
+    <link type="text/css" href="CSSFile/index.css" rel="stylesheet">
 </head>
 <body>
 <%
     HttpSession httpSession = request.getSession();
     SubnettingTool subnettingTool = (SubnettingTool) httpSession.getAttribute("SubnettingTool");
 %>
-    <h1>
-        IP 详细 信息
-    </h1>
+<h1>
+    IP 详细 信息
+</h1>
+
 <hr>
-    <table>
+
+<center>
+    <table align="center">
         <tr>
             <th>
                 <h3>
@@ -34,7 +38,8 @@
         </tr>
         <tr>
             <th>
-                <h3>默认网关
+                <h3>
+                    默认网关
                 </h3>
             </th>
             <td>
@@ -140,5 +145,7 @@
             </td>
         </tr>
     </table>
+</center>
+
 </body>
 </html>
