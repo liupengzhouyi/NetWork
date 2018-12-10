@@ -289,8 +289,9 @@ public class SubnettingTool {
     public static void main(String[] args) {
         SubnettingTool subnettingTool = new SubnettingTool(
                 new IPAddress(198, 157, 12, 56),
-                new SubnetMask(255, 255, 224, 224)
+                new SubnetMask(255, 255, 255, 224)
         );
+
         System.out.println("输入信息是否合法：" + subnettingTool.getIsError());
         System.out.println("         IP: " + subnettingTool.getIpAddress().getIPAddress());
         System.out.println("    子网掩码: " + subnettingTool.getSubnetMask().getSubnetMask());
