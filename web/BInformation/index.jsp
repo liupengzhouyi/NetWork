@@ -21,9 +21,8 @@
 </h1>
 
 <hr>
-
 <center>
-    <table align="center">
+    <table class="tableForIndex">
         <tr>
             <th>
                 <h3>
