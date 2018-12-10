@@ -1,5 +1,6 @@
 package SubnettingTools;
 
+import SubnettingTools.IP.DeterminelKindAndSubnetMask;
 import SubnettingTools.IP.IPAddress;
 import SubnettingTools.IP.SubnetMask;
 
@@ -21,7 +22,8 @@ public class GetInputInformationServlet extends HttpServlet {
         this.createIpAdressNumber();
         //创建子网掩码
         this.createSubnetMask();
-
+        //创建工具类
+        this.createSubnettingTool();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,13 +74,38 @@ public class GetInputInformationServlet extends HttpServlet {
      * 创建子网掩码
      */
     public void createSubnetMask() {
-        SubnetMask subnetMask = new SubnetMask(Integer.parseInt(this.getSubnetMaskNumberI()),
+        SubnetMask subnetMask = new SubnetMask( Integer.parseInt(this.getSubnetMaskNumberI()),
                                                 Integer.parseInt(this.getSubnetMaskNumberII()),
                                                 Integer.parseInt(this.getSubnetMaskNumberIII()),
                                                 Integer.parseInt(this.getSubnetMaskNumberIV()));
         this.setSubnetMask(subnetMask);
     }
 
+    /**
+     * 创建网址判断的工具
+     */
+    public void createSubnettingTool() {
+        SubnettingTool subnettingTool = new SubnettingTool(this.getIpAddress(), this.getSubnetMask());
+        this.setSubnettingTool(subnettingTool);
+    }
+
+    /**
+     * 判断输入
+     */
+    public void determineInput() {
+        int number = 0;
+        String kind = this.getSubnettingTool().getNetKind();
+        DeterminelKindAndSubnetMask determinelKindAndSubnetMask = new DeterminelKindAndSubnetMask(kind, this.getSubnetMask());
+        boolean key = determinelKindAndSubnetMask.isKey();
+        if (key) {
+            //IP与子网掩码配套
+
+        } else {
+            //IP与子网掩码 不 配套
+
+        }
+
+    }
 
     private String IPAddressNumberI = null;
 
@@ -99,6 +126,8 @@ public class GetInputInformationServlet extends HttpServlet {
     private IPAddress ipAddress = null;
 
     private SubnetMask subnetMask = null;
+
+    private SubnettingTool subnettingTool = null;
 
     public String getIPAddressNumberI() {
         return IPAddressNumberI;
@@ -178,5 +207,13 @@ public class GetInputInformationServlet extends HttpServlet {
 
     public void setSubnetMask(SubnetMask subnetMask) {
         this.subnetMask = subnetMask;
+    }
+
+    public SubnettingTool getSubnettingTool() {
+        return subnettingTool;
+    }
+
+    public void setSubnettingTool(SubnettingTool subnettingTool) {
+        this.subnettingTool = subnettingTool;
     }
 }

@@ -10,7 +10,7 @@ public class DeterminelKindAndSubnetMask {
      * @param kind
      * @param subnetMask
      */
-    public DeterminelKindAndSubnetMask(int kind, SubnetMask subnetMask) {
+    public DeterminelKindAndSubnetMask(String kind, SubnetMask subnetMask) {
         //初始化
         this.init();
         this.kind = kind;
@@ -23,6 +23,7 @@ public class DeterminelKindAndSubnetMask {
      * 初始化
      */
     public void init() {
+        this.kind = new String();
         this.subnetMask = new SubnetMask(0, 0, 0, 0);
     }
 
@@ -32,19 +33,19 @@ public class DeterminelKindAndSubnetMask {
      */
     public boolean determinel() {
         boolean key = false;
-        if(this.getKind() == 1) {
+        if(this.getKind().equals("A")) {
             if (this.getSubnetMask().getNumberI() == 255) {
                 key = true;
             } else {
                 key = false;
             }
-        } else if (this.getKind() == 2) {
+        } else if (this.getKind().equals("B")) {
             if (this.getSubnetMask().getNumberI() == 255 && this.getSubnetMask().getNumberII() == 255) {
                 key = true;
             } else {
                 key = false;
             }
-        } else if (this.getKind() == 3) {
+        } else if (this.getKind().equals("C")) {
             if (this.getSubnetMask().getNumberI() == 255
                     && this.getSubnetMask().getNumberII() == 255
                     && this.getSubnetMask().getNumberIII() == 255) {
@@ -58,7 +59,7 @@ public class DeterminelKindAndSubnetMask {
 
     private boolean key = false;
 
-    private int kind = 0;
+    private String kind = null;
 
     private SubnetMask subnetMask = null;
 
@@ -70,11 +71,11 @@ public class DeterminelKindAndSubnetMask {
         this.key = key;
     }
 
-    public int getKind() {
+    public String getKind() {
         return kind;
     }
 
-    public void setKind(int kind) {
+    public void setKind(String kind) {
         this.kind = kind;
     }
 
@@ -91,7 +92,7 @@ public class DeterminelKindAndSubnetMask {
      * @param args
      */
     public static void main(String[] args) {
-        DeterminelKindAndSubnetMask determinelKindAndSubnetMask = new DeterminelKindAndSubnetMask(3,
+        DeterminelKindAndSubnetMask determinelKindAndSubnetMask = new DeterminelKindAndSubnetMask("C",
                 new SubnetMask(255, 255, 255, 0));
         System.out.println(determinelKindAndSubnetMask.isKey());
     }
