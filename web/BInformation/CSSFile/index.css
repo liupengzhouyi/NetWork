@@ -12,16 +12,17 @@ body
     height: 100%;
 
     align-self: center;
-
-    align-items: center;
-
-    alignment: center;
 }
 
 h1
 {
     text-align: center;
     color: #115cff;
+}
+
+hr
+{
+    color: aqua;
 }
 
 .tableForIndex
