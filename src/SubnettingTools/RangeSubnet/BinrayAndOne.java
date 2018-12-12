@@ -30,8 +30,8 @@ public class BinrayAndOne {
                     if (this.getInputBinray().charAt(i) == '0') {
                         this.setOutBinary("1" + this.getOutBinary());
                         k = true;
-                    } else {
-                        this.setOutBinary(this.getInputBinray().charAt(i) + this.getOutBinary());
+                    } else if (this.getInputBinray().charAt(i) == '1') {
+                        this.setOutBinary("0" + this.getOutBinary());
                     }
                 } else {
                     this.setOutBinary(this.getInputBinray().charAt(i) + this.getOutBinary());
@@ -41,7 +41,6 @@ public class BinrayAndOne {
             //不能继续加
             this.setOutBinary(this.getInputBinray());
         }
-
     }
 
     /**
@@ -84,7 +83,6 @@ public class BinrayAndOne {
 
     public static void main(String[] args) {
         String string = "001010";
-
         BinrayAndOne binrayAndOne = new BinrayAndOne(string, 6);
         System.out.println(binrayAndOne.getOutBinary());
 

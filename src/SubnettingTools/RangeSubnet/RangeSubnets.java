@@ -8,20 +8,17 @@ public class RangeSubnets {
 
     /**
      * 构建函数
-     * @param ipAddress
-     * @param subnetMask
+     * @param startIP
+     * @param endIP
+     * @param broadcastIP
      */
-    public RangeSubnets(IPAddress ipAddress, SubnetMask subnetMask) {
+    public RangeSubnets(IPAddress startIP, IPAddress endIP, IPAddress broadcastIP) {
         //初始化
         this.init();
-        this.setIpAddress(ipAddress);
-        this.setSubnetMask(subnetMask);
-        //获取网络占用的主机位与网络种类
-        this.getNumberAndKind();
-
+        this.startIP = startIP;
+        this.endIP = endIP;
+        this.broadcastIP = broadcastIP;
     }
-
-
 
     /**
      * 初始化函数
@@ -43,10 +40,13 @@ public class RangeSubnets {
         this.setKind(this.getRangeSubnet().getKind());
     }
 
+    //开始IP
     private IPAddress startIP = null;
 
+    //结束IP
     private IPAddress endIP = null;
 
+    //广播IP
     private IPAddress broadcastIP = null;
 
     private RangeSubnet rangeSubnet= null;
@@ -122,6 +122,5 @@ public class RangeSubnets {
     public void setKind(int kind) {
         this.kind = kind;
     }
-
 
 }

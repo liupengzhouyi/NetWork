@@ -2,6 +2,8 @@ package SubnettingTools.IP;
 
 public class BinaryIPAddress {
 
+
+
     public BinaryIPAddress(String numberI, String numberII, String numberIII, String numberIV) {
         //初始化
         this.init();

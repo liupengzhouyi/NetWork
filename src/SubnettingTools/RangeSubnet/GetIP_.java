@@ -1,6 +1,7 @@
 package SubnettingTools.RangeSubnet;
 
 import SubnettingTools.IP.IPAddress;
+import SubnettingTools.Tools.DecimalTobinary;
 
 public class GetIP_ {
 
@@ -24,6 +25,8 @@ public class GetIP_ {
         this.kind = kind;
         //获取IP_
         this.setString();
+        //设置二进制原网络位
+        this.setBinString();
     }
 
     /**
@@ -59,8 +62,27 @@ public class GetIP_ {
         return binString;
     }
 
-    public void setBinString(String binString) {
-        this.binString = binString;
+    /**
+     * 设置二进制原网络位
+     */
+    public void setBinString() {
+        this.binString = "";
+        if (this.getKind() == 1) {
+            DecimalTobinary decimalTobinaryI = new DecimalTobinary(this.getIpAddress().getNumberI());
+            this.binString = this.binString + decimalTobinaryI.getBinary() + ".";
+        } else if (this.getKind() == 2) {
+            DecimalTobinary decimalTobinaryI = new DecimalTobinary(this.getIpAddress().getNumberI());
+            this.binString = this.binString + decimalTobinaryI.getBinary() + ".";
+            DecimalTobinary decimalTobinaryII = new DecimalTobinary(this.getIpAddress().getNumberII());
+            this.binString = this.binString + decimalTobinaryII.getBinary() + ".";
+        } else if (this.getKind() == 3) {
+            DecimalTobinary decimalTobinaryI = new DecimalTobinary(this.getIpAddress().getNumberI());
+            this.binString = this.binString + decimalTobinaryI.getBinary() + ".";
+            DecimalTobinary decimalTobinaryII = new DecimalTobinary(this.getIpAddress().getNumberII());
+            this.binString = this.binString + decimalTobinaryII.getBinary() + ".";
+            DecimalTobinary decimalTobinaryIII = new DecimalTobinary(this.getIpAddress().getNumberIII());
+            this.binString = this.binString + decimalTobinaryIII.getBinary() + ".";
+        }
     }
 
     /**
@@ -78,5 +100,11 @@ public class GetIP_ {
             this.string = this.string + this.getIpAddress().getNumberII() + ".";
             this.string = this.string + this.getIpAddress().getNumberIII() + ".";
         }
+    }
+
+    public static void main(String[] args) {
+        GetIP_ getIP_ = new GetIP_(new IPAddress(192, 173, 12, 67), 3);
+        System.out.println(getIP_.getString());
+        System.out.println(getIP_.getBinString());
     }
 }
