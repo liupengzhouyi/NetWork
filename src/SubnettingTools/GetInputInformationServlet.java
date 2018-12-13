@@ -3,6 +3,10 @@ package SubnettingTools;
 import SubnettingTools.IP.DeterminelKindAndSubnetMask;
 import SubnettingTools.IP.IPAddress;
 import SubnettingTools.IP.SubnetMask;
+import SubnettingTools.RangeSubnet.GetAllSubnet;
+import SubnettingTools.RangeSubnet.GetRangeSubnets;
+import SubnettingTools.RangeSubnet.RangeSubnets;
+import SubnettingTools.Subnet.RangeSubnet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "GetInputInformationServlet")
 public class GetInputInformationServlet extends HttpServlet {
@@ -27,6 +32,10 @@ public class GetInputInformationServlet extends HttpServlet {
         this.createSubnettingTool();
         System.out.println(this.getSubnettingTool().getIpAddress().getIPAddress());
         System.out.println(this.getSubnettingTool().getSubnetMask().getSubnetMask());
+        //创建IP信息类
+        this.createRangeSubnet();
+        //设置你的所有IP子网范围
+        this.createGetAllSubnet();
         //设置你的Session
         this.saveSession(request);
         //判断输入
@@ -50,6 +59,9 @@ public class GetInputInformationServlet extends HttpServlet {
         this.SubnetMaskNumberII     = new String();
         this.SubnetMaskNumberIII    = new String();
         this.SubnetMaskNumberIV     = new String();
+        this.rangeSubnet = new RangeSubnet(new IPAddress(0, 0, 0, 0),
+                new SubnetMask(0, 0, 0, 0));
+        this.getAllSubnet = new GetAllSubnet(new IPAddress(0, 0, 0, 0), 1, 0);
     }
 
     /**
@@ -144,6 +156,7 @@ public class GetInputInformationServlet extends HttpServlet {
     public void saveSession(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("SubnettingTool", this.getSubnettingTool());
+        httpSession.setAttribute("AllSubnet", this.getGetAllSubnet().getArrayList());
     }
 
     private String IPAddressNumberI     = null;
@@ -167,6 +180,10 @@ public class GetInputInformationServlet extends HttpServlet {
     private SubnetMask subnetMask       = null;
 
     private SubnettingTool subnettingTool = null;
+
+    private RangeSubnet rangeSubnet = null;
+
+    private GetAllSubnet getAllSubnet = null;
 
     public String getIPAddressNumberI() {
         return IPAddressNumberI;
@@ -254,5 +271,40 @@ public class GetInputInformationServlet extends HttpServlet {
 
     public void setSubnettingTool(SubnettingTool subnettingTool) {
         this.subnettingTool = subnettingTool;
+    }
+
+    /**
+     * 创建IP信息类
+     */
+    public void createRangeSubnet() {
+        this.setRangeSubnet(new RangeSubnet(this.getIpAddress(), this.getSubnetMask()));
+    }
+
+    public RangeSubnet getRangeSubnet() {
+        return rangeSubnet;
+    }
+
+    public void setRangeSubnet(RangeSubnet rangeSubnet) {
+        this.rangeSubnet = rangeSubnet;
+    }
+
+    /**
+     * 设置你的所有IP子网范围
+     */
+    public void createGetAllSubnet() {
+        this.setGetAllSubnet(new GetAllSubnet(this.getIpAddress(), this.getRangeSubnet().getKind(), this.getRangeSubnet().getHostNumber()));
+        /*ArrayList<RangeSubnets> list1 = this.getGetAllSubnet().getArrayList();
+        for ( RangeSubnets s : list1
+             ) {
+            s.show();
+        }*/
+    }
+
+    public GetAllSubnet getGetAllSubnet() {
+        return getAllSubnet;
+    }
+
+    public void setGetAllSubnet(GetAllSubnet getAllSubnet) {
+        this.getAllSubnet = getAllSubnet;
     }
 }

@@ -143,6 +143,20 @@
                 </h4>
             </td>
         </tr>
+        <tr>
+            <th>
+                <h3>
+                    查看所有子网划分
+                </h3>
+            </th>
+            <td>
+                <h4>
+                    <a href="/SubnetMaskInformation/index.jsp">
+                        点我查看
+                    </a>
+                </h4>
+            </td>
+        </tr>
     </table>
 </center>
 
