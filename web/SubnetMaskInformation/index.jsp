@@ -15,27 +15,31 @@
 <html>
 <head>
     <title>子网划分范围</title>
-    <%--<link href="../BInformation/CSSFile/index.css" type="text/css" rel="stylesheet">--%>
+    <link href="CSSFile/index.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+<h1>
+    显示所有子网
+</h1>
+<hr>
 <table>
     <tr>
-        <th>
+        <th class="a">
             <h3>
                 子网序号
             </h3>
         </th>
-        <th>
+        <th class="b">
             <h3>
                 子网起始IP
             </h3>
         </th>
-        <th>
+        <th class="c">
             <h3>
                 子网结束IP
             </h3>
         </th>
-        <th>
+        <th class="d">
             <h3>
                 子网广播IP
             </h3>
@@ -51,16 +55,16 @@
         //rangeSubnets.show();
         %>
     <tr>
-        <td>
+        <td class="a">
             <%=i%>
         </td>
-        <td>
+        <td class="b">
             <%=rangeSubnets.getStartIP().getIPAddress()%>
         </td>
-        <td>
+        <td class="c">
             <%=rangeSubnets.getEndIP().getIPAddress()%>
         </td>
-        <td>
+        <td class="d">
             <%=rangeSubnets.getBroadcastIP().getIPAddress()%>
         </td>
     </tr>
