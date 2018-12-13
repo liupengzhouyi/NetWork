@@ -123,4 +123,10 @@ public class RangeSubnets {
         this.kind = kind;
     }
 
+    public void show() {
+        System.out.println("开始IP：" + this.getStartIP().getIPAddress());
+        System.out.println("结束IP：" + this.getEndIP().getIPAddress());
+        System.out.println("广播IP：" + this.getBroadcastIP().getIPAddress());
+    }
+
 }

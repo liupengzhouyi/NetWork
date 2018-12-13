@@ -143,9 +143,13 @@ public class AddIPAdressEnd {
     }
 
     public static void main(String[] args) {
-        AddIPAdressEnd addIPAdressEnd = new AddIPAdressEnd("11000000.10011100.01111011.110");
-        System.out.println(addIPAdressEnd.getStringBinI());
-        System.out.println(addIPAdressEnd.getStringBinII());
-        System.out.println(addIPAdressEnd.getStringBinIII());
+        String str = "11000000.10011100.01111011.110";
+        for (int i=0; i<3; i++) {
+            AddIPAdressEnd addIPAdressEnd = new AddIPAdressEnd(str);
+            System.out.println(addIPAdressEnd.getStringBinI());
+            System.out.println(addIPAdressEnd.getStringBinII());
+            System.out.println(addIPAdressEnd.getStringBinIII());
+        }
+
     }
 }

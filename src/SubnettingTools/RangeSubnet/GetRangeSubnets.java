@@ -151,6 +151,12 @@ public class GetRangeSubnets {
         this.setRangeSubnets(new RangeSubnets(this.getStartIPAddress(), this.getEndIPAddress(), this.getBroadcastIPAddres()));
     }
 
+    public void show(){
+        System.out.println("开始IP：" + this.getRangeSubnets().getStartIP().getIPAddress());
+        System.out.println("结束IP：" + this.getRangeSubnets().getEndIP().getIPAddress());
+        System.out.println("广播IP：" + this.getRangeSubnets().getBroadcastIP().getIPAddress());
+    }
+
     public String getEndBinIPAddress() {
         return endBinIPAddress;
     }
@@ -221,10 +227,8 @@ public class GetRangeSubnets {
         System.out.println(getRangeSubnets.getStartBinIPAddress());
         System.out.println(getRangeSubnets.getEndBinIPAddress());
         System.out.println(getRangeSubnets.getBroadcastBinIPAddress());
-        System.out.println(getRangeSubnets.getStartIPAddress().getIPAddress());
-        System.out.println(getRangeSubnets.getEndIPAddress().getIPAddress());
-        System.out.println(getRangeSubnets.getBroadcastIPAddres().getIPAddress());
-        System.out.println(getRangeSubnets.getRangeSubnets().getStartIP().getIPAddress());
+        getRangeSubnets.show();
+        //System.out.println(getRangeSubnets.getRangeSubnets().getStartIP().getIPAddress());
     }
 }
 

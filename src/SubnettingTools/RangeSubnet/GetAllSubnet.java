@@ -1,6 +1,7 @@
 package SubnettingTools.RangeSubnet;
 
 import SubnettingTools.IP.IPAddress;
+import SubnettingTools.Subnet.RangeSubnet;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public class GetAllSubnet {
         this.createGetIP();
         //设置你的占用的主机位
         this.createGetSubnet_number();
+        //设置你的子网范围
+        this.createSubnet();
     }
 
     /**
@@ -28,6 +31,7 @@ public class GetAllSubnet {
         this.startBinIPAddress = new String();
         this.endBinIPAddress = new String();
         this.broadcastBinIPAddress = new String();
+        this.setArrayList(new ArrayList<RangeSubnets>());
     }
 
     /**
@@ -61,28 +65,43 @@ public class GetAllSubnet {
     private String startBinIPAddress = null;
 
     private String broadcastBinIPAddress = null;
+
+    private ArrayList<RangeSubnets> arrayList = null;
+
     /**
      * 构建网段开启结束
      */
     public void createSubnet() {
+        //int i=0;
         ArrayList<String> subnetNumbers = this.getSubnet_number.getList();
         this.setStartBinIPAddress(this.getIP_.getBinString());
-        for (String s : subnetNumbers
+        for (String subnetNumber : subnetNumbers
              ) {
-            String strI = this.getStartBinIPAddress() + s;
-            AddIPAdressEnd addIPAdressEnd = new AddIPAdressEnd(strI);
-            //获取IP开始
-            this.setStartBinIPAddress(addIPAdressEnd.getStringBinI());
-            //获取IP结束
-            this.setEndBinIPAddress(addIPAdressEnd.getStringBinII());
-            //获取广播地址
-            this.setBroadcastBinIPAddress(addIPAdressEnd.getStringBinIII());
+            //System.out.println(this.getStartBinIPAddress());
+            //System.out.println(subnetNumber);
+            String strI = this.getStartBinIPAddress() + subnetNumber;
+            //System.out.println(strI);
+            String tempString = strI;
+            AddIPAdressEnd addIPAdressEnd = new AddIPAdressEnd(tempString);
 
+            /*System.out.println(addIPAdressEnd.getStringBinI());
+            System.out.println(addIPAdressEnd.getStringBinII());
+            System.out.println(addIPAdressEnd.getStringBinIII());*/
 
+            //System.out.println(i);
+            //i++;
+            GetRangeSubnets getRangeSubnets = new GetRangeSubnets(addIPAdressEnd.getStringBinI(),
+                                                                    addIPAdressEnd.getStringBinII(),
+                                                                    addIPAdressEnd.getStringBinIII());
 
+            RangeSubnets rangeSubnets = new RangeSubnets(getRangeSubnets.getStartIPAddress(), getRangeSubnets.getEndIPAddress(), getRangeSubnets.getBroadcastIPAddres());
 
+            //rangeSubnets.show();
 
-            System.out.println(this.getStartBinIPAddress() + s);
+            //getRangeSubnets.show();
+
+            this.getArrayList().add(rangeSubnets);
+
         }
 
     }
@@ -159,8 +178,28 @@ public class GetAllSubnet {
         this.broadcastBinIPAddress = broadcastBinIPAddress;
     }
 
+    public ArrayList<RangeSubnets> getArrayList() {
+        return arrayList;
+    }
+
+    public void setArrayList(ArrayList<RangeSubnets> arrayList) {
+        this.arrayList = arrayList;
+    }
+
+    /**
+     * 测、测试输出版本
+     */
+    public void testShow() {
+        ArrayList<RangeSubnets> l = this.getArrayList();
+        for (RangeSubnets rangeSubnets : l
+             ) {
+            rangeSubnets.show();
+        }
+    }
+
     public static void main(String[] args) {
-        GetAllSubnet getAllSubnet = new GetAllSubnet(new IPAddress(192, 156, 123, 68), 3, 3);
-        getAllSubnet.createSubnet();
+        GetAllSubnet getAllSubnet = new GetAllSubnet(new IPAddress(10, 156, 123, 68), 1, 15);
+
+        getAllSubnet.testShow();
     }
 }
