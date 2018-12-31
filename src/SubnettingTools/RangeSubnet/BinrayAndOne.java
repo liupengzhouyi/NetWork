@@ -82,7 +82,7 @@ public class BinrayAndOne {
     }
 
     public static void main(String[] args) {
-        String string = "001010";
+        String string = "111001";
         BinrayAndOne binrayAndOne = new BinrayAndOne(string, 6);
         System.out.println(binrayAndOne.getOutBinary());
 

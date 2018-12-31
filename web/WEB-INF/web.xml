@@ -14,4 +14,9 @@
         <url-pattern>/SubnettingTools/GetInputInformationServlet</url-pattern>
     </servlet-mapping>
 
+    <!--设置程序的打开文件，即首选文件-->
+    <welcome-file-list>
+        <welcome-file>/getYourIpAddressAndSubnetMask.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>

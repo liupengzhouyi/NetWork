@@ -101,7 +101,7 @@ public class IPAddress {
     }
 
     public static void main(String[] args) {
-        SubnettingTools.IP.IPAddress ipAddress = new IPAddress(125, 23, 54, 67);
+        SubnettingTools.IP.IPAddress ipAddress = new IPAddress(123, 25, 185, 221);
         System.out.println(ipAddress.getIPAddress());
         System.out.println(ipAddress.getBinIPAddress());
     }

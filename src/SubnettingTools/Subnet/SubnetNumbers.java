@@ -96,7 +96,7 @@ public class SubnetNumbers {
      * 获取你的子网数量
      *
      * 1。获取占用的主机位
-     * 2。通过占用的主机位 --> 获取子网书
+     * 2。通过占用的主机位 --> 获取子网数
      * @return
      */
     public int getSubnetNumbers() {
