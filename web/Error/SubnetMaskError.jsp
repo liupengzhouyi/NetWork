@@ -14,5 +14,18 @@
 <%
     String string = "你的子网掩码错误！";
 %>
+<h1>
+    <center>
+        <%=string%>
+    </center>
+</h1>
+<hr>
+<h3>
+    <center>
+        <a href="/getYourIpAddressAndSubnetMask.jsp">
+            点我返回
+        </a>
+    </center>
+</h3>
 </body>
 </html>

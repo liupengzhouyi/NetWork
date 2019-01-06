@@ -224,9 +224,9 @@ public class GetRangeSubnets {
     public static void main(String[] args) {
         GetRangeSubnets getRangeSubnets = new GetRangeSubnets("11000000.10011100.01111011.11000000",
                 "11000000.10011100.01111011.11011110", "11000000.10011100.01111011.11011111");
-        System.out.println(getRangeSubnets.getStartBinIPAddress());
-        System.out.println(getRangeSubnets.getEndBinIPAddress());
-        System.out.println(getRangeSubnets.getBroadcastBinIPAddress());
+        //System.out.println(getRangeSubnets.getStartBinIPAddress());
+        //System.out.println(getRangeSubnets.getEndBinIPAddress());
+        //System.out.println(getRangeSubnets.getBroadcastBinIPAddress());
         getRangeSubnets.show();
         //System.out.println(getRangeSubnets.getRangeSubnets().getStartIP().getIPAddress());
     }

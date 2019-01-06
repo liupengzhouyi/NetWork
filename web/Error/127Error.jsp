@@ -14,5 +14,18 @@
     <%
         String string = "你的IP地址为127开头，我们不提供为127开头的IP地址服务！";
     %>
+    <h1>
+        <center>
+            <%=string%>
+        </center>
+    </h1>
+<hr>
+<h3>
+    <center>
+        <a href="/getYourIpAddressAndSubnetMask.jsp">
+            点我返回
+        </a>
+    </center>
+</h3>
 </body>
 </html>

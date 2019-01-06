@@ -11,6 +11,21 @@
     <title>子网掩码与网络种类错误</title>
 </head>
 <body>
-
+<%
+    String string = "子网掩码与网络种类错误";
+%>
+<h1>
+<center>
+    <%=string%>
+</center>
+</h1>
+<hr>
+<h3>
+    <center>
+        <a href="/getYourIpAddressAndSubnetMask.jsp">
+            点我返回
+        </a>
+    </center>
+</h3>
 </body>
 </html>

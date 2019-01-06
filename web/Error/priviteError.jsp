@@ -12,7 +12,20 @@
 </head>
 <body>
 <%
-    String string = "你的IP地址为私有IP，我们不提供为私有IP地址的服务！";
+    String string = "你的IP地址为私有IP，我们不提供为私有IP地址的服务！请开通VIP服务！";
 %>
+<h1>
+    <center>
+        <%=string%>
+    </center>
+</h1>
+<hr>
+<h3>
+    <center>
+        <a href="/getYourIpAddressAndSubnetMask.jsp">
+            点我返回
+        </a>
+    </center>
+</h3>
 </body>
 </html>
